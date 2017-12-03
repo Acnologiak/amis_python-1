@@ -1,0 +1,23 @@
+def read_m(m):
+    try:
+        x = int(input("Введіть число: "))
+    except ValueError:
+        print("Помилка, ви ввенли не число.")
+        return read_m(m)
+    if x == 99999:
+        return m
+    else:
+        m.append(x)
+    return read_m(m)
+
+
+def min_number(m, number, iterator):
+    if iterator == 0:
+        number = m[iterator]
+    if iterator == len(m)-1:
+        return(number)
+    elif m[iterator] > m[iterator+1]:
+        number = m[iterator+1]
+    return min_number(m, number, iterator+1)
+print("Для завершення вводу введіть - '99999'")
+print("Найменше число:", min_number(read_m([]), 0, 0))
