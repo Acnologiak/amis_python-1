@@ -1,0 +1,74 @@
+def read_m():
+    # функція вводу масиву чисел
+    s = input("Введіть послідовність чисел: ")
+    s = s.split(' ')
+    if len(s) == 1 and s[0] == '':
+        print("Помилка, ви ввели менше чим 1 число.")
+        return read_m()
+        return s
+    else:
+        return s
+
+
+def int_m(m, i, l, s):
+    # функція перетворення типу даних str в int
+    m.append(int(s[i]))
+    if i == l:
+        return m
+    return int_m(m, i+1, l, s)
+
+
+def func1(m, x, l, i, b, o):
+    # групування
+    if x == m[i]:
+        b.append(o)
+    else:
+        x = m[i]
+        o += 1
+        b.append(o)
+    if i == l:
+        return b
+    return func1(m, x, l, i+1, b, o)
+
+
+def func2(b, x, l, i, n, o, m, v):
+    # сумування
+    if b[i] == x:
+        o += 1
+        if i == l:
+            n.append(o)
+            v.append(m[i])
+            return n, v
+        return func2(b, x, l, i+1, n, o, m, v)
+    else:
+        v.append(m[i-1])
+        n.append(o)
+        o = 1
+        x = b[i]
+        if i == l:
+            n.append(o)
+            v.append(m[i])
+            return n, v
+        return func2(b, x, l, i+1, n, o, m, v)
+
+
+def max_n_print(m, l, x, i, v, z):
+    # функція яка знаходить максимальну кількість та сам елемент
+    if x < m[i]:
+        x = m[i]
+        z = v[i]
+    if l == i:
+        return x, z
+    return max_n_print(m, l, x, i+1, v, z)
+
+
+m = read_m()
+l = len(m)
+m = int_m([], 0, l-1, m)
+b = func1(m, m[0], l-1, 0, [], 1)
+n, v = func2(b, b[0], l-1, 0, [], 0, m, [])
+print(n)
+print(v)
+l = len(n)
+x, z = max_n_print(n, l-1, n[0], 0, v, 0)
+print("Відповідь", x, "група -", (str(z)+" ")*x)
