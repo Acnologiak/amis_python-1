@@ -1,0 +1,23 @@
+def read_m(m):
+    try:
+        x = int(input("Введіть число: "))
+    except ValueError:
+        print("Помилка, ви ввенли не число.")
+        return read_m(m)
+    if x == 99999:
+        return m
+    else:
+        m.append(x)
+    return read_m(m)
+
+
+def function(k, m, s):
+    s.append(m[k])
+    if k == 0:
+        return s
+    k -= 1
+    return function(k, m, s)
+print("Для завершення вводу введіть - '99999'")
+m = read_m([])
+l = len(m)
+print(function(l-1, m, []))
