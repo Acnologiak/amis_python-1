@@ -1,0 +1,12 @@
+def sum(x):
+    try:
+        xx = float(input("Введіть число: "))
+        x += xx
+    except ValueError:
+        print("Помилка, ви ввенли не число.")
+        return sum(x)
+    if xx == 99999:
+        return x
+    return sum(x)
+x = 0
+print("Сумма введених чисел: ", sum(x)-99999)
