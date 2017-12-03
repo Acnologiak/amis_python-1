@@ -1,0 +1,44 @@
+def read_x():
+    try:
+        x = float(input("Введіть x: "))
+    except ValueError:
+        print("Помилка, ви ввенли не число.")
+        return read_x()
+    return x
+
+
+def read_n():
+    try:
+        n = float(input("Введіть n: "))
+    except ValueError:
+        print("Помилка, ви ввенли не число.")
+        return read_n()
+    return n
+
+
+def ch_zero():
+    x = read_x()
+    n = read_n()
+    if x == n:
+        print("Помилка, ділення на 0!")
+        return ch_zero()
+    return x, n
+
+
+def function(i, s, x, n):
+    s += (x**i-2*n)/(x-n)
+    i += 1
+    if n == i:
+        return s
+    return function(i, s, x, n)
+
+
+def testOnesDigit():
+    print("Тест function()...", end="")
+    assert(function(1, 0, 2, 3) == 6)
+    print("Все вірно!")
+
+
+a = ch_zero()
+testOnesDigit()
+print("Результат розрахунків:", function(1, 0, a[0], a[1]))
