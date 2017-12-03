@@ -1,0 +1,44 @@
+def read_m():
+    s = input("Введіть послідовність чисел: ")
+    s = s.split(' ')
+    if len(s) > 1:
+        return s
+    else:
+        print("Помилка, ви ввели менше чим 2 числа.")
+        return read_m()
+        return s
+
+
+def int_m(m, i, l, s):
+    m.append(int(s[i]))
+    if i == l:
+        return m
+    return int_m(m, i+1, l, s)
+
+
+def max_n(m, l, x, i):
+    if x < m[i]:
+        x = m[i]
+    if l == i:
+        return x
+    return max_n(m, l, x, i+1)
+
+
+def del_x(m, i, l, s, x):
+    if s[i] != x:
+        m.append(int(s[i]))
+    if i == l:
+        return m
+    return del_x(m, i+1, l, s, x)
+
+
+m = read_m()
+l = len(m)
+m = int_m([], 0, l-1, m)
+
+x = max_n(m, l-1, m[0], 1)
+
+m = del_x([], 0, l-1, m, x)
+
+l = len(m)
+print("Друге за величиною число в масиві:", max_n(m, l-1, m[0], 1))
